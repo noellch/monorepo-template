@@ -1,0 +1,5 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "NextJS",
+  "extends": ["@tsconfig/next/tsconfig", "@tsconfig/strictest/tsconfig", "@template/tsconfig/ext/check-js/tsconfig"]
+}

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Node",
+  "extends": [
+    "@tsconfig/node22/tsconfig",
+    "@tsconfig/strictest/tsconfig",
+    "@template/tsconfig/ext/check-js/tsconfig",
+    "@template/tsconfig/ext/no-emit/tsconfig",
+    "@template/tsconfig/ext/bundler/tsconfig"
+  ]
+}
