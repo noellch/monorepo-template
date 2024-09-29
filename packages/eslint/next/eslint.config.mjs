@@ -48,17 +48,16 @@ const config = [
         project: ["packages/*/tsconfig.json", "tsconfig.json"],
       },
     },
-    // settings: {
-    //   next: {
-    //     rootDir: ["packages/web/"],
-    //   },
-    //   react: {
-    //     version: "detect",
-    //   },
-    // },
+    settings: {
+      next: {
+        rootDir: ["packages/web/"],
+      },
+      react: {
+        version: "detect",
+      },
+    },
     rules: {
       "@next/next/no-duplicate-head": "off",
-      "@next/next/no-html-link-for-pages": "off",
       "prettier/prettier": "error",
       "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/no-namespace": "off",
