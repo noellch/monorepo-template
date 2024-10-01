@@ -12,6 +12,7 @@
   "scripts": {
     "dev:client": "pnpm run --filter @template/web dev",
     "dev": "run-p dev:* --print-label",
+    "build": "pnpm run --filter @template/web build",
     "lint": "eslint .",
     "lint:fix": "pnpm lint --fix",
     "format": "prettier \"packages/**/*.{ts,tsx,js,jsx}\" --ignore-path .gitignore",
@@ -24,7 +25,8 @@
     "@template/eslint": "workspace:*",
     "@template/libs": "workspace:*",
     "@template/tsconfig": "workspace:*",
-    "@template/web": "workspace:*"
+    "@template/web": "workspace:*",
+    "npm-run-all": "^4.1.5"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^18.5.0",

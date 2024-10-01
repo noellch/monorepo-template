@@ -11,6 +11,8 @@ import tsdocPlugin from "eslint-plugin-tsdoc";
 import unusedImports from "eslint-plugin-unused-imports";
 import globals from "globals";
 
+import nextEslintConfig from "../next/eslint.config.mjs";
+
 const _filename = fileURLToPath(import.meta.url);
 const _dirname = path.dirname(_filename);
 const compat = new FlatCompat({
@@ -19,16 +21,9 @@ const compat = new FlatCompat({
   allConfig: js.configs.all,
 });
 
-export default [
-  ...compat
-    .extends("eslint:recommended", "plugin:@typescript-eslint/recommended", "next", "next/core-web-vitals", "prettier")
-    .map((config) => ({
-      ...config,
-      files: ["**/*.ts", "**/*.tsx"],
-    })),
+const config = [
+  ...compat.extends("eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier"),
   {
-    files: ["**/*.ts", "**/*.tsx"],
-
     plugins: {
       "@typescript-eslint": typescriptEslint,
       "simple-import-sort": simpleImportSort,
@@ -36,44 +31,21 @@ export default [
       tsdoc: tsdocPlugin,
       prettier,
     },
-
+    ignores: ["node_modules", "dist"],
     languageOptions: {
       globals: {
-        ...globals.browser,
         ...globals.node,
       },
-
       parser: tsParser,
       ecmaVersion: "latest",
-      sourceType: "module",
-
-      parserOptions: {
-        project: ["packages/*/tsconfig.json", "tsconfig.json"],
-      },
-    },
-
-    settings: {
-      next: {
-        rootDir: ["packages/web/"],
-      },
-
-      react: {
-        version: "detect",
-      },
     },
 
     rules: {
-      "@typescript-eslint/no-empty-interface": "off",
+      "prettier/prettier": "error",
       "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/no-namespace": "off",
-      "@typescript-eslint/no-var-requires": "off",
-      "@typescript-eslint/no-unused-vars": "warn",
-      "react/react-in-jsx-scope": "off",
-      "react-internal/no-production-logging": "off",
-      "react/display-name": "off",
-      "@next/next/no-img-element": "off",
+      "@typescript-eslint/no-unused-vars": "off",
       "@typescript-eslint/no-non-null-assertion": "warn",
-      "@next/next/no-duplicate-head": "off",
       "@typescript-eslint/ban-types": [
         "error",
         {
@@ -112,4 +84,7 @@ export default [
       ],
     },
   },
+  ...nextEslintConfig,
 ];
+
+export default config;

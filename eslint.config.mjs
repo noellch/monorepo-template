@@ -1,5 +1,5 @@
-import nextEslintConfig from "@template/eslint/next/eslint.config.mjs";
+import baseEslintConfig from "@template/eslint/base/eslint.config.mjs";
 
-const config = [...nextEslintConfig];
+const config = [...baseEslintConfig];
 
 export default config;
