@@ -1,8 +1,5 @@
-import sharedConfig from "../shared/eslint.config.mjs";
-
-export default [
+const config = [
   {
-    ...sharedConfig,
     files: ["**/*.ts", "**/*.tsx"],
     ignores: [
       "**/*.d.ts",
@@ -22,7 +19,6 @@ export default [
       },
     },
     rules: {
-      ...sharedConfig.rules,
       "react/react-in-jsx-scope": "off",
       "react-internal/no-production-logging": "off",
       "react/display-name": "off",
@@ -31,3 +27,5 @@ export default [
     },
   },
 ];
+
+export default config;
