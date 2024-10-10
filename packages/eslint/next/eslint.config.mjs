@@ -1,8 +1,3 @@
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-
-import { FlatCompat } from "@eslint/eslintrc";
-import js from "@eslint/js";
 import typescriptEslint from "@typescript-eslint/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
 import prettier from "eslint-plugin-prettier";
@@ -11,24 +6,38 @@ import tsdocPlugin from "eslint-plugin-tsdoc";
 import unusedImports from "eslint-plugin-unused-imports";
 import globals from "globals";
 
-const _filename = fileURLToPath(import.meta.url);
-const _dirname = path.dirname(_filename);
-const compat = new FlatCompat({
-  baseDirectory: _dirname,
-  recommendedConfig: js.configs.recommended,
-  allConfig: js.configs.all,
-});
-
 export default [
-  ...compat
-    .extends("eslint:recommended", "plugin:@typescript-eslint/recommended", "next", "next/core-web-vitals", "prettier")
-    .map((config) => ({
-      ...config,
-      files: ["**/*.ts", "**/*.tsx"],
-    })),
   {
     files: ["**/*.ts", "**/*.tsx"],
-
+    ignores: [
+      "**/*.d.ts",
+      "**/*.test.ts",
+      "**/*.test.tsx",
+      "**/*.spec.ts",
+      "**/*.spec.tsx",
+      "packages/web/.next/**",
+      "**/node_modules/**",
+    ],
+    languageOptions: {
+      parser: tsParser,
+      ecmaVersion: "latest",
+      sourceType: "module",
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      },
+      parserOptions: {
+        project: ["packages/*/tsconfig.json", "tsconfig.json"],
+      },
+    },
+    settings: {
+      next: {
+        rootDir: ["packages/web"],
+      },
+      react: {
+        version: "detect",
+      },
+    },
     plugins: {
       "@typescript-eslint": typescriptEslint,
       "simple-import-sort": simpleImportSort,
@@ -36,33 +45,8 @@ export default [
       tsdoc: tsdocPlugin,
       prettier,
     },
-
-    languageOptions: {
-      globals: {
-        ...globals.browser,
-        ...globals.node,
-      },
-
-      parser: tsParser,
-      ecmaVersion: "latest",
-      sourceType: "module",
-
-      parserOptions: {
-        project: ["packages/*/tsconfig.json", "tsconfig.json"],
-      },
-    },
-
-    settings: {
-      next: {
-        rootDir: ["packages/web/"],
-      },
-
-      react: {
-        version: "detect",
-      },
-    },
-
     rules: {
+      "prettier/prettier": "error",
       "@typescript-eslint/no-empty-interface": "off",
       "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/no-namespace": "off",

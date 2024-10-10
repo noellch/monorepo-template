@@ -1,8 +1,7 @@
-import path from "node:path";
-import { fileURLToPath } from "node:url";
+// import path from "node:path";
+// import { fileURLToPath } from "node:url";
 
-import { FlatCompat } from "@eslint/eslintrc";
-import js from "@eslint/js";
+// import js from "@eslint/js";
 import typescriptEslint from "@typescript-eslint/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
 import prettier from "eslint-plugin-prettier";
@@ -13,17 +12,21 @@ import globals from "globals";
 
 import nextEslintConfig from "../next/eslint.config.mjs";
 
-const _filename = fileURLToPath(import.meta.url);
-const _dirname = path.dirname(_filename);
-const compat = new FlatCompat({
-  baseDirectory: _dirname,
-  recommendedConfig: js.configs.recommended,
-  allConfig: js.configs.all,
-});
+// const _filename = fileURLToPath(import.meta.url);
+// const _dirname = path.dirname(_filename);
 
-const config = [
-  ...compat.extends("eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier"),
+export default [
   {
+    files: ["**/*.ts", "**/*.tsx"],
+    ignores: [
+      "**/*.d.ts",
+      "**/*.test.ts",
+      "**/*.test.tsx",
+      "**/*.spec.ts",
+      "**/*.spec.tsx",
+      "packages/web/.next/**",
+      "**/node_modules/**",
+    ],
     plugins: {
       "@typescript-eslint": typescriptEslint,
       "simple-import-sort": simpleImportSort,
@@ -31,15 +34,14 @@ const config = [
       tsdoc: tsdocPlugin,
       prettier,
     },
-    ignores: ["node_modules", "dist"],
     languageOptions: {
       globals: {
         ...globals.node,
       },
       parser: tsParser,
       ecmaVersion: "latest",
+      sourceType: "module",
     },
-
     rules: {
       "prettier/prettier": "error",
       "@typescript-eslint/no-explicit-any": "off",
@@ -86,5 +88,3 @@ const config = [
   },
   ...nextEslintConfig,
 ];
-
-export default config;

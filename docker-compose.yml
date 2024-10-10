@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  web:
+    container_name: template-web
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - /app/packages/web/node_modules
+      - /app/packages/web/.next
+      - .:/app
