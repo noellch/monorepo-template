@@ -1,4 +1,5 @@
 import localFont from "next/font/local";
+import { ReactNode } from "react";
 
 import type { Metadata } from "next";
 
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <html lang="en">
