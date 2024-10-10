@@ -19,7 +19,7 @@
     "format": "prettier \"packages/**/*.{ts,tsx,js,jsx}\" --ignore-path .gitignore",
     "format:check": "pnpm format --check",
     "format:write": "pnpm format --write",
-    "validate": "pnpm format:write && pnpm lint",
+    "validate": "pnpm format:write && pnpm lint:fix",
     "prepare": "husky"
   },
   "dependencies": {
