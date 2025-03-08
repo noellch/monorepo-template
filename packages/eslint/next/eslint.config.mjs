@@ -7,12 +7,12 @@ const config = [
       "**/*.test.tsx",
       "**/*.spec.ts",
       "**/*.spec.tsx",
-      "packages/web/.next/**",
+      "packages/client/.next/**",
       "**/node_modules/**",
     ],
     settings: {
       next: {
-        rootDir: ["packages/web"],
+        rootDir: ["packages/client"],
       },
       react: {
         version: "detect",

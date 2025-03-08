@@ -9,6 +9,6 @@ services:
     environment:
       - NODE_ENV=production
     volumes:
-      - /app/packages/web/node_modules
-      - /app/packages/web/.next
+      - /app/packages/client/node_modules
+      - /app/packages/client/.next
       - .:/app

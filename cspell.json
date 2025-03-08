@@ -1,0 +1,25 @@
+{
+  "allowCompoundWords": true,
+  "enableFiletypes": ["*"],
+  "enableGlobDot": true,
+  "files": ["**/*"],
+  "ignorePaths": [
+    "**/__snapshots__/**",
+    "**/.gitignore",
+    "**/.dockerignore",
+    "**/.env.local",
+    "**/.git",
+    "**/*.svg",
+    "**/*.test.(ts|tsx)",
+    "**/*.spec.(ts|tsx)",
+    "**/*.d.(ts|tsx)",
+    "**/*.code-workspace",
+    "/.git",
+    "/.prettierignore",
+    "/pnpm-lock.yaml"
+  ],
+  "includeRegExpList": ["[ -~]"],
+  "useGitignore": true,
+  "version": "0.2",
+  "words": ["tsafe", "zodios"]
+}

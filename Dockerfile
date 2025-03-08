@@ -11,8 +11,8 @@ RUN pnpm build
 FROM node:22-alpine AS runner
 RUN npm install -g pnpm
 WORKDIR /app
-COPY --from=builder /app/packages/web/.next ./packages/web/.next
-COPY --from=builder /app/packages/web/package.json ./packages/web/
+COPY --from=builder /app/packages/client/.next ./packages/client/.next
+COPY --from=builder /app/packages/client/package.json ./packages/client/
 COPY --from=builder /app/package.json ./
 
 EXPOSE 3000

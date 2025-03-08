@@ -18,7 +18,7 @@ const config = [
       "**/*.test.tsx",
       "**/*.spec.ts",
       "**/*.spec.tsx",
-      "packages/web/.next/**",
+      "packages/client/.next/**",
       "**/node_modules/**",
     ],
     plugins: {
@@ -75,7 +75,6 @@ const config = [
         },
       ],
       "simple-import-sort/exports": "error",
-      "tsdoc/syntax": "warn",
       "unused-imports/no-unused-imports": "warn",
       "unused-imports/no-unused-vars": [
         "warn",
