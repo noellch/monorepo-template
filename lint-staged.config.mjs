@@ -2,7 +2,7 @@ import process from "node:process";
 
 import glob from "fast-glob";
 
-const isFormat = process.env["TYPE"] === "format";
+const isFormat = process.env.TYPE === "format";
 const tsExtensions = ["js", "jsx", "ts", "tsx"];
 
 const pkgs = glob.sync("packages/*", {

@@ -7,19 +7,17 @@ import tsdocPlugin from "eslint-plugin-tsdoc";
 import unusedImports from "eslint-plugin-unused-imports";
 import globals from "globals";
 
-import nextEslintConfig from "../next/eslint.config.mjs";
-
 const config = [
   {
-    files: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"],
+    files: ["**/*.{ts,tsx,js,jsx}"],
     ignores: [
       "**/*.d.ts",
-      "**/*.test.ts",
-      "**/*.test.tsx",
-      "**/*.spec.ts",
-      "**/*.spec.tsx",
-      "packages/client/.next/**",
+      "**/*.{test,spec}.{ts,tsx}",
+      "**/dist/**",
+      "**/build/**",
+      "**/coverage/**",
       "**/node_modules/**",
+      "**/.next/**",
     ],
     plugins: {
       "@typescript-eslint": typescriptEslint,
@@ -39,6 +37,26 @@ const config = [
       parserOptions: {
         project: ["**/tsconfig.json"],
         tsconfigRootDir: process.cwd(),
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+    },
+    linterOptions: {
+      reportUnusedDisableDirectives: true,
+    },
+    settings: {
+      next: {
+        rootDir: ["packages/client"],
+      },
+      react: {
+        version: "detect",
+      },
+      "import/resolver": {
+        typescript: {},
+        node: {
+          extensions: [".js", ".jsx", ".ts", ".tsx"],
+        },
       },
     },
     rules: {
@@ -47,7 +65,7 @@ const config = [
       "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/no-namespace": "off",
       "@typescript-eslint/no-var-requires": "off",
-      "@typescript-eslint/no-unused-vars": "warn",
+      "@typescript-eslint/no-unused-vars": "off", // 由 unused-imports 處理
       "@typescript-eslint/no-non-null-assertion": "warn",
       "@typescript-eslint/ban-types": [
         "error",
@@ -58,6 +76,8 @@ const config = [
           },
         },
       ],
+      "@typescript-eslint/consistent-type-imports": "off",
+      "@typescript-eslint/no-import-type-side-effects": "off",
       "simple-import-sort/imports": [
         "error",
         {
@@ -85,10 +105,28 @@ const config = [
           argsIgnorePattern: "^_",
         },
       ],
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: ["**/dist/**"],
+              message: "Do not import from dist directories directly.",
+            },
+          ],
+        },
+      ],
+      "react/react-in-jsx-scope": "off",
+      "react-internal/no-production-logging": "off",
+      "react/display-name": "off",
+      "@next/next/no-img-element": "off",
+      "@next/next/no-duplicate-head": "off",
       ...js.configs.recommended.rules,
+      "no-unused-vars": "off",
+      "no-undef": "off",
+      "no-redeclare": "off",
     },
   },
-  ...nextEslintConfig,
 ];
 
 export default config;

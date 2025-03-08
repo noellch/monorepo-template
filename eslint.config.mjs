@@ -1,5 +1,5 @@
-import baseEslintConfig from "@template/eslint/base/eslint.config.mjs";
+import eslintConfig from "@template/eslint/config/eslint.config.mjs";
 
-const config = [...baseEslintConfig];
+const config = [...eslintConfig];
 
 export default config;
